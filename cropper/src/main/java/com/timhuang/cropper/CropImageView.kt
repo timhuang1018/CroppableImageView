@@ -7,7 +7,7 @@ import android.net.Uri
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
-import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
 import kotlin.math.sqrt
@@ -15,7 +15,7 @@ import kotlin.math.sqrt
 
 class CropImageView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : ImageView(context, attrs, defStyleAttr) {
+) : AppCompatImageView(context, attrs, defStyleAttr) {
 
     private val TAG = "CropImageView"
     private var mode = NONE
