@@ -23,7 +23,7 @@ publishing {
             artifact("$buildDir/outputs/aar/cropper-release.aar")
             groupId = "com.timhuang"
             artifactId = "croppableimageview"
-            version = "1.0.2"
+            version = "1.0.3"
 
         }
     }
@@ -45,8 +45,8 @@ bintray {
         desc = "Croppable ImageView in Kotlin"
         publicDownloadNumbers = true
         version.apply {
-            name = "1.0.1"
-            vcsTag = "1.0.1"
+            name = "1.0.3"
+            vcsTag = "1.0.3"
             released = MyConfig.today
         }
 

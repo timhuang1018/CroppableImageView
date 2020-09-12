@@ -1,16 +1,26 @@
 CroppableImageView
 =====
 
-##Getting started
-###Setup dependency
+## Getting started
+#### Setup dependency
 In app level gradle file add dependency:
 ```groovy
-implementation ""
+implementation "com.timhuang:croppableimageview:1.0.3"
 ```
+#### Add view
+```xml
+    <com.timhuang.cropper.CropImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="matrix"
+/>
+```
+the scaleType needs to be set into matrix for appropriate cropping result,
+you can use attribue ```app:cropShape="oval"``` to display hint and able crop a oval image, default value is rectangle.
+#### Crop image
+call ```CropImageView.cropImage()``` at where you want to get the crop image, this api return a bitmap
 
-
-
-##License
+## License
 Copyright 2020, Tim Huang
 
 Licensed under the Apache License, Version 2.0 (the "License");

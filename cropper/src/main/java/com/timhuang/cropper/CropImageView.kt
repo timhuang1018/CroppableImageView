@@ -12,8 +12,10 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
 import kotlin.math.sqrt
 
-
-class CropImageView @JvmOverloads constructor(
+/**
+ * Created by timhuang on 2020/7/31.
+ **/
+open class CropImageView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : AppCompatImageView(context, attrs, defStyleAttr) {
 
@@ -73,7 +75,7 @@ class CropImageView @JvmOverloads constructor(
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        Log.d(TAG, "onSizeChanged, w:${w}, h:${h} , oldw:$oldw oldh:$oldh")
+//        Log.d(TAG, "onSizeChanged, w:${w}, h:${h} , oldw:$oldw oldh:$oldh")
         init(w,h)
         drawableSetting()
     }
@@ -142,25 +144,25 @@ class CropImageView @JvmOverloads constructor(
 
 
     override fun setImageBitmap(bm: Bitmap?) {
-        Log.d(TAG,"setImageBitmap called")
+//        Log.d(TAG,"setImageBitmap called")
         super.setImageBitmap(bm)
         drawableSetting()
     }
 
     override fun setImageResource(resId: Int) {
-        Log.d(TAG,"setImageResource called")
+//        Log.d(TAG,"setImageResource called")
         super.setImageResource(resId)
         drawableSetting()
     }
 
     override fun setImageURI(uri: Uri?) {
-        Log.d(TAG,"setImageURI called")
+//        Log.d(TAG,"setImageURI called")
         super.setImageURI(uri)
         drawableSetting()
     }
 
     override fun setImageDrawable(drawable: Drawable?) {
-        Log.d(TAG,"setImageDrawable called")
+//        Log.d(TAG,"setImageDrawable called")
         super.setImageDrawable(drawable)
         drawableSetting()
     }
@@ -224,8 +226,8 @@ class CropImageView @JvmOverloads constructor(
 
     private fun drawableSetting(){
         if(drawable==null) return
-        Log.d(TAG,"image W :${drawable.intrinsicWidth}, H :${drawable.intrinsicHeight}")
-        Log.d(TAG,"view matrix :$matrix, imageMatrix :$imageMatrix")
+//        Log.d(TAG,"image W :${drawable.intrinsicWidth}, H :${drawable.intrinsicHeight}")
+//        Log.d(TAG,"view matrix :$matrix, imageMatrix :$imageMatrix")
 
         val wRatio = viewW / drawable.intrinsicWidth.toFloat()
         val hRatio = viewH / drawable.intrinsicHeight.toFloat()
@@ -258,7 +260,7 @@ class CropImageView @JvmOverloads constructor(
         val intArray = intArrayOf(0,0)
         getLocationOnScreen(intArray)
         val point = Point(intArray[0],intArray[1])
-        Log.d(TAG, "view location x:${point.x}, y:${point.y}")
+//        Log.d(TAG, "view location x:${point.x}, y:${point.y}")
         viewX = point.x
         viewY = point.y
         leftLimit = point.x
@@ -270,9 +272,12 @@ class CropImageView @JvmOverloads constructor(
         drawCropArea()
     }
 
+    /**
+     * hinting the area inside is going to be cropped if [cropImage] is called
+     */
     private fun drawCropArea() = run {
         if (!::extraCanvas.isInitialized) return@run
-        Log.d(TAG,"drawCropArea called")
+//        Log.d(TAG,"drawCropArea called")
         if (shape== OVAL){
             val rect = Rect(0,0,viewW,viewH)
 
@@ -299,7 +304,7 @@ class CropImageView @JvmOverloads constructor(
     }
 
     private fun scale(ratio :Float, focusX: Float, focusY: Float) {
-        Log.d(TAG,"ratio:$ratio, focusX :$focusX, focusY:$focusY")
+//        Log.d(TAG,"ratio:$ratio, focusX :$focusX, focusY:$focusY")
         imageMatrix.getValues(matrixArray)
         val oldX = matrixArray[2]
         val oldY = matrixArray[5]
@@ -312,7 +317,7 @@ class CropImageView @JvmOverloads constructor(
         imageH = (imageH * ratio).toInt()
         imageX = imageX + matrixArray[2] - oldX
         imageY = imageY + matrixArray[5] - oldY
-        Log.d(TAG,"imageX:$imageX,imageY:$imageY,imageW:$imageW,imageH:$imageH imageMatrix :$imageMatrix")
+//        Log.d(TAG,"imageX:$imageX,imageY:$imageY,imageW:$imageW,imageH:$imageH imageMatrix :$imageMatrix")
     }
 
 
@@ -325,7 +330,7 @@ class CropImageView @JvmOverloads constructor(
     }
 
 
-    private fun cropImageRectangle(): Bitmap {
+    protected open fun cropImageRectangle(): Bitmap {
         val bitmap = drawable.toBitmap(imageW,imageH)
         Log.d(TAG,"bitmap :${bitmap.byteCount},${bitmap.width},${bitmap.height}")
 
@@ -344,7 +349,7 @@ class CropImageView @JvmOverloads constructor(
             cropH = imageH - y
         }
         val cropBitmap = Bitmap.createBitmap(bitmap,x,y,cropW,cropH)
-        Log.d(TAG,"cropBitmap :${cropBitmap.byteCount},${cropBitmap.width},${cropBitmap.height}")
+//        Log.d(TAG,"cropBitmap :${cropBitmap.byteCount},${cropBitmap.width},${cropBitmap.height}")
 //        cropBitmap.compress(Bitmap.CompressFormat.JPEG, 100, FileOutputStream("/sdcard/Download/tmp.jpg"))
 //        bitmap.recycle()
         return cropBitmap
@@ -362,7 +367,7 @@ class CropImageView @JvmOverloads constructor(
 
     }
 
-    private fun cropImageOval(): Bitmap {
+    protected open fun cropImageOval(): Bitmap {
         val srcBitmap = cropImageRectangle()
         // Calculate the circular bitmap width with border
         val squareBitmapWidth = Math.min(srcBitmap.width, srcBitmap.height)
@@ -372,7 +377,7 @@ class CropImageView @JvmOverloads constructor(
             squareBitmapWidth,  // Height
             Bitmap.Config.ARGB_8888 // Config
         )
-        Log.d(TAG,"dstBitmap :${dstBitmap.byteCount},${dstBitmap.width},${dstBitmap.height}")
+//        Log.d(TAG,"dstBitmap :${dstBitmap.byteCount},${dstBitmap.width},${dstBitmap.height}")
         val canvas = Canvas(dstBitmap)
         // Initialize a new Paint instance
         val paint = Paint()
@@ -389,6 +394,9 @@ class CropImageView @JvmOverloads constructor(
         return dstBitmap
     }
 
+    /**
+     * set cropping area as oval
+     */
     fun setShapeOval(boolean: Boolean){
         if (boolean){
             shape = OVAL
@@ -396,6 +404,12 @@ class CropImageView @JvmOverloads constructor(
         }
     }
 
+    /**
+     * recommend way to get the bitmap
+     * this will crop image depend on the [shape]
+     * if the [cropImageOval] or [cropImageRectangle] api want to be used on its own
+     * extend this view and make those api public
+     */
     fun cropImage():Bitmap{
         return when(shape){
             RECTANGLE-> cropImageRectangle()
