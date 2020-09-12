@@ -1,5 +1,6 @@
 CroppableImageView
 =====
+A simple and lightweight library to help create a view object which has cropping ability.
 
 ## Getting started
 #### Setup dependency
@@ -12,8 +13,7 @@ implementation "com.timhuang:croppableimageview:1.0.3"
     <com.timhuang.cropper.CropImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="matrix"
-/>
+        android:scaleType="matrix"/>
 ```
 the scaleType needs to be set into matrix for appropriate cropping result,
 you can use attribue ```app:cropShape="oval"``` to display hint and able crop a oval image, default value is rectangle.
