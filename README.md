@@ -7,7 +7,7 @@ A simple and lightweight library to help create a view object which has cropping
 #### Setup dependency
 In app level gradle file add dependency:
 ```groovy
-implementation "com.timhuang:croppableimageview:1.0.3"
+implementation "com.timhuang:croppableimageview:1.0.4"
 ```
 #### Add view
 ```xml
