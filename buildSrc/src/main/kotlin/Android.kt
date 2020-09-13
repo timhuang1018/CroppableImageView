@@ -9,8 +9,8 @@ internal fun Project.configAndroid()= this.extensions.getByType<BaseExtension>()
     defaultConfig {
         minSdkVersion(23)
         targetSdkVersion(29)
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.0.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")

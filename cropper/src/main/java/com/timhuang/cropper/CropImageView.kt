@@ -33,7 +33,7 @@ open class CropImageView @JvmOverloads constructor(
     private var bottomLimit = 0
 
     //indicating crop area setting
-    private val shadowColor = ResourcesCompat.getColor(resources, R.color.black_opacity_50,null)
+    private var shadowColor :Int
     private lateinit var extraCanvas :Canvas
     private lateinit var extraBitmap : Bitmap
 
@@ -66,6 +66,8 @@ open class CropImageView @JvmOverloads constructor(
         ).apply {
             try {
                 shape = getInteger(R.styleable.CropImageView_cropShape, RECTANGLE)
+                shadowColor = getColor(R.styleable.CropImageView_cropHintColor,ResourcesCompat.getColor(resources, R.color.black_opacity_50,null))
+
             }finally {
                 recycle()
             }
@@ -256,7 +258,6 @@ open class CropImageView @JvmOverloads constructor(
     private fun init(w: Int, h: Int) {
         viewW = w
         viewH = h
-
         val intArray = intArrayOf(0,0)
         getLocationOnScreen(intArray)
         val point = Point(intArray[0],intArray[1])

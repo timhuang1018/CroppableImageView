@@ -1,6 +1,7 @@
 CroppableImageView
 =====
 A simple and lightweight library to help create a view object which has cropping ability.
+![Demo library in project](https://giphy.com/gifs/lqeNwTe833I54lcMPz)
 
 ## Getting started
 #### Setup dependency
@@ -15,10 +16,11 @@ implementation "com.timhuang:croppableimageview:1.0.3"
         android:layout_height="wrap_content"
         android:scaleType="matrix"/>
 ```
-the scaleType needs to be set into matrix for appropriate cropping result,
+The scaleType needs to be set into matrix for appropriate cropping result,
 you can use attribue ```app:cropShape="oval"``` to display hint and able crop a oval image, default value is rectangle.
+Use ```app:cropHintColor="..."```to change the hint color, this only work when shape is set to oval.
 #### Crop image
-call ```CropImageView.cropImage()``` at where you want to get the crop image, this api return a bitmap
+Call ```CropImageView.cropImage()``` at where you want to get the crop image, this api return a bitmap
 
 ## License
 Copyright 2020, Tim Huang
