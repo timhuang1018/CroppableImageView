@@ -1,7 +1,7 @@
 CroppableImageView
 =====
 A simple and lightweight library to help create a view object which has cropping ability.
-![Demo library in project](https://giphy.com/gifs/lqeNwTe833I54lcMPz)
+![Demo library in project](https://media.giphy.com/media/lqeNwTe833I54lcMPz/giphy.gif)
 
 ## Getting started
 #### Setup dependency
